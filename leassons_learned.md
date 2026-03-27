@@ -1,43 +1,48 @@
-# Проблемы, с которыми я столкнулся в процессе
+# Issues Encountered During the Process
 
+Note: All operations are performed with ROOT privileges.
 
-# Я все делаю от имени ROOT
-
-# 1. Отсутствие пакета kinit 
+# 1. Missing kinit Command
+If the kinit command is not found, you need to install the Kerberos workstation utilities.
 ```
 sudo dnf install krb5-workstation -y
 ```
-Затем можно попробовать еще раз.
+After installation, you can proceed with the authentication check.
 
-# 2. Ошибка при проверке Kerberos токена
-
-Затем пробуем:
+# 2. Kerberos Token Validation Error
+When attempting to run:
 ```
 kinit user@test.local
 ```
 
-Выводится ошибка:
+You might receive the following error:
 kinit: KDC reply did not match expectations while getting initial credentials
 
-В этом случае либо мы ввели неправильные имя юзера или пароль юзера, или же дело в конфигурационном файле Kerberos /etc/krb5.conf
-И так мы должны отредактировать поле #default_realm, так как Kerberos не понимает какой домен используется по умолчанию.
+Potential Causes:
+
+Incorrect username or password.
+
+Misconfiguration in the Kerberos configuration file (/etc/krb5.conf). Specifically, Kerberos may not know which domain to use by default.
+
+Solution:
+Edit the default_realm field in the configuration file:
 ```
 nano /etc/krb5.conf
 ```
-Меняем поле:    default_realm = TEST.LOCAL
+Change the following field (ensure it is in UPPERCASE):    default_realm = TEST.LOCAL
 
-Пробуем снова:
+Try again:
 ```
 kinit user@TEST.LOCAL #Вводим credentials
 klist
 ```
 
-Если выводится токен, то все в порядке с Kerberos конфигурацией!
+If a token is displayed, your Kerberos configuration is now correct!
 
-# 3. Конфигурация SSSD
-Если не произошла автоматическая конфигурация SSSD, то нам нужно отредактировать конфигурационный файл /etc/sssd/sssd.conf
+# 3. SSSD Configuration
+If the automatic SSSD configuration fails, you must manually edit the /etc/sssd/sssd.conf file.
 ```nano /etc/sssd/sssd.conf```
-Отредактируем так, чтобы все выглядело так:
+Adjust the configuration to match the following structure:
 ```
 [sssd]
 domains = test.local
@@ -57,11 +62,11 @@ use_fully_qualified_names = True
 ldap_id_mapping = True
 access_provider = ad
 ```
-Основные редактирования делаем в полях:
+Key fields to verify:
 domains = test.local
 krb5_realm = TEST.LOCAL
 
-Затем следует только перезапустить сервис SSSD:
+After editing, restart and enable the SSSD service to apply the changes:
 ```
 sudo systemctl restart sssd
 sudo systemctl enable sssd
