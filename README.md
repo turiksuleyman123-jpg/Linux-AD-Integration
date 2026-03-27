@@ -89,7 +89,7 @@ Try switching to the AD user locally or via SSH:
 ```
 su - user@test.local
 ```
-# OR
+OR
 ```
 ssh user@test.local@localhost
 ```
