@@ -1,4 +1,4 @@
-# linux-ad-integration
+# Linux-AD-Integration
 Интеграция Linux с AD (Active Directory) Windows Server 2022
 
 #Цель
