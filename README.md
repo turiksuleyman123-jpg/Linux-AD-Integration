@@ -17,51 +17,59 @@
 ```nmcli con show
 nmcli con mod ens160 ipv4.dns 192.168.100.100
 nmcli con up ens160
+```
 
 #или же временно:
+```
 echo "nameserver  192.168.100.100" > /etc/resolv.conf
-
+```
 # 2.Проверяем домен
-
+```
 realm discover test.local
-
+```
 #Если видим информацию о домене, то все ок!
 
 
 # 3.Меняем FQDN для подключения к домену.(если заранее не поменяли)
-
+```
 hostnamectl set-hostname rhel.test.local
 hostnamectl #проверка
-
+```
 #Нужно добавить строку в /etc/hosts
+```
 nano /etc/hosts -----> 192.168.100.x rhel.test.local rhel
 reboot
-
+```
 # 4.Подключаемся к домену
-
+```
 realm join test.local -U Administrator
-
+```
 #Вводим пароль администратора домена и входим в домен
 
 # 5.Проверка
-
+```
 realm list
+```
 #Если ты реально в домене, то увидишь инфу о домене.(имя, тип, configured:)
-
+```
 id user@test.local
+```
 #Если вывод есть, значит LINUX видит пользователя, работает SSSD, работает Kerberos.
-
+```
 kinit user@TEST.LOCAL
 klist
+```
 #Если получим ticket, значит Kerberos работает
 
 #Пробуем залогиниться
+```
 su - user@test.local
-
+```
 или же через SSH
+```
 ssh user@test.local@localhost
-
-#Проверяем на стороне Windows
+```
+# Проверяем на стороне Windows
 Открываем Active Directory Users and Computer
 Заходим в Computers
 
