@@ -83,7 +83,7 @@ klist
 ```
 If a ticket is granted, Kerberos is working perfectly.
 
-Test Login
+# Test Login
 Try switching to the AD user locally or via SSH:
 
 ```
