@@ -10,7 +10,7 @@
 - Пакеты на Linux: sssd, realmd, krb5-workstation, samba, oddjob, oddjob-mkhomedir
 
 # Я все делаю от лица ROOT
-# 1.Настройка DNS
+# 2.Настройка DNS
 
 #Нужно использовать DNS домена. В моем случае 192.168.100.100
 
@@ -23,30 +23,36 @@ nmcli con up ens160
 ```
 echo "nameserver  192.168.100.100" > /etc/resolv.conf
 ```
-# 2.Проверяем домен
+# 3.Проверяем домен
 ```
 realm discover test.local
 ```
 #Если видим информацию о домене, то все ок!
 
 
-# 3.Меняем FQDN для подключения к домену.(если заранее не поменяли)
+# 4.Меняем FQDN для подключения к домену.(если заранее не поменяли)
+
+Нужно поставить hostname в виде: rhel.example.com
+А вместо example.com вставляем реальный домен нашего AD. В моем случае:  rhel.test.local
+
 ```
 hostnamectl set-hostname rhel.test.local
 hostnamectl #проверка
 ```
-#Нужно добавить строку в /etc/hosts
+
+Нужно добавить строку в /etc/hosts
 ```
 nano /etc/hosts -----> 192.168.100.x rhel.test.local rhel
 reboot
 ```
-# 4.Подключаемся к домену
+
+# 6.Подключаемся к домену
 ```
 realm join test.local -U Administrator
 ```
 #Вводим пароль администратора домена и входим в домен
 
-# 5.Проверка
+# 7.Проверка
 ```
 realm list
 ```
