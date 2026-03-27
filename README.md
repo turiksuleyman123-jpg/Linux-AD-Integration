@@ -6,7 +6,9 @@ Connect Linux (RHEL/CentOS/Ubuntu) to Active Directory to enable centralized use
 
 # OS and Software
 Linux: RHEL 10
+
 AD: Windows Server 2022
+
 Linux Packages: sssd, realmd, krb5-workstation, samba, oddjob, oddjob-mkhomedir
 
 # Note: All operations are performed with ROOT privileges.
