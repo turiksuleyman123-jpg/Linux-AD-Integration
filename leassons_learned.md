@@ -24,7 +24,9 @@ nano /etc/krb5.conf
 Меняем поле:    default_realm = TEST.LOCAL
 
 Пробуем снова:
+```
 kinit user@TEST.LOCAL #Вводим credentials
 klist
+```
 
-Если выводится токен, то все в порядке с Kerberos.
+Если выводится токен, то все в порядке с Kerberos конфигурацией!
