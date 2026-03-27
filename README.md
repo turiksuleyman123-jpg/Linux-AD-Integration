@@ -57,10 +57,12 @@ realm join test.local -U Administrator
 realm list
 ```
 #Если ты реально в домене, то увидишь инфу о домене.(имя, тип, configured:)
+
 ```
 id user@test.local
 ```
 #Если вывод есть, значит LINUX видит пользователя, работает SSSD, работает Kerberos.
+
 ```
 kinit user@TEST.LOCAL
 klist
