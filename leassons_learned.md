@@ -1,10 +1,13 @@
 # Problems i faced in process
 
+
 # Я все делаю от имени ROOT
+
 # 1. Отсутствие пакета kinit 
 ```
 sudo dnf install krb5-workstation -y
 ```
+Затем можно попробовать еще раз.
 
 # 2. Ошибка при проверке Kerberos токена
 
