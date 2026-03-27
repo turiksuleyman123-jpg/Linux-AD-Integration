@@ -33,7 +33,7 @@ Temporary configuration (manual edit):
 ```
 echo "nameserver 192.168.100.100" > /etc/resolv.conf
 ```
-3. Verify Domain Discovery
+# 3. Verify Domain Discovery
 Check if the Linux machine can see the domain.
 
 ```
@@ -41,7 +41,7 @@ realm discover test.local
 ```
 If you see domain information in the output, the network configuration is correct.
 
-4. Set FQDN (Fully Qualified Domain Name)
+# 4. Set FQDN (Fully Qualified Domain Name)
 The hostname must be set in the format hostname.domain.com. In this case: rhel.test.local.
 
 ```
@@ -55,13 +55,13 @@ Add this line: [IP Address] [FQDN] [Short Name]
 nano /etc/hosts -----> 192.168.100.x rhel.test.local rhel
 
 ```reboot```
-5. Join the Domain
+# 5. Join the Domain
 Run the join command and provide the Domain Administrator's password when prompted.
 ```
 realm join test.local -U Administrator
 ```
 
-6. Verification
+# 6. Verification
 Check Realm Status
 ```
 realm list
@@ -93,7 +93,7 @@ su - user@test.local
 ```
 ssh user@test.local@localhost
 ```
-7. Windows Side Verification
+# 7. Windows Side Verification
 Open Active Directory Users and Computers.
 
 Navigate to the Computers container.
