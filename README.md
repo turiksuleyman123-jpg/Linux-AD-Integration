@@ -18,7 +18,8 @@
 
 #Нужно использовать DNS домена. В моем случае 192.168.100.100
 
-```nmcli con show
+```
+nmcli con show
 nmcli con mod ens160 ipv4.dns 192.168.100.100
 nmcli con up ens160
 ```
