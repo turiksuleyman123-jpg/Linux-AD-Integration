@@ -10,6 +10,9 @@
 - Пакеты на Linux: sssd, realmd, krb5-workstation, samba, oddjob, oddjob-mkhomedir
 
 # Я все делаю от лица ROOT
+# 1.Установка нужных пакетов
+Установка пакетов SSSD, Samba: для аутентификации в AD (SSSD) и совместного использования — папок и принтеров между Linux и Windows(SAMBA).
+```sudo dnf install realmd sssd oddjob oddjob-mkhomedir adcli samba-common-tools -y```
 # 2.Настройка DNS
 
 #Нужно использовать DNS домена. В моем случае 192.168.100.100
